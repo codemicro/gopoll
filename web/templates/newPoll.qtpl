@@ -1,0 +1,14 @@
+New poll page
+
+{% import (
+    "github.com/codemicro/gopoll/internal/pages/internal/id"
+) %}
+
+{% func NewPoll() %}
+
+    <turbo-frame id="{%s id.MainBox %}">
+        <h2>Create a new poll</h2>
+        <p>Blah blah</p>
+    </turbo-frame>
+
+{% endfunc %}
