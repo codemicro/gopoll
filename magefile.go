@@ -16,12 +16,7 @@ import (
 )
 
 func InstallDeps() error {
-	fmt.Println("Installing dependencies")
-	if err := sh.Run("go", "mod", "download"); err != nil {
-		return err
-	}
-
-	return exsh.EnsureGoBin("qtc", "github.com/valyala/quicktemplate/qtc")
+	return sh.Run("go", "mod", "download")
 }
 
 // QuickTemplate templates
@@ -30,6 +25,11 @@ var templateDir = alib.OsPathJoin("web", "templates")
 var generatedTemplatesOutputDir = alib.OsPathJoin("internal", "pages", "internal", "templates")
 
 func GenerateTemplates() error {
+
+	// ensure qtc is available
+	if err := exsh.EnsureGoBin("qtc", "github.com/valyala/quicktemplate/qtc"); err != nil {
+		return err
+	}
 
 	// run qtc command
 	if err := sh.Run("qtc", "-dir="+templateDir, "-skipLineComments"); err != nil {
