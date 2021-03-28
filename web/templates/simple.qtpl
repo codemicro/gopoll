@@ -1,0 +1,6 @@
+This is a simple page
+
+{% func Simple(name string) %}
+<h1>Hello!</h1>
+<p>Hi there {%s name %}, it's good to have you.</p>
+{% endfunc %}

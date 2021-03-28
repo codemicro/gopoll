@@ -1,0 +1,6 @@
+This is a standard page header
+
+{% func StandardHead(title string) %}
+<title>{%s title %}</title>
+<script src="https://cdn.skypack.dev/@hotwired/turbo"></script>
+{% endfunc %}
