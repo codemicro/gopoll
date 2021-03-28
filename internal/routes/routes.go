@@ -1,8 +1,11 @@
 package routes
 
-import "github.com/gofiber/fiber/v2"
+import (
+	"github.com/codemicro/gopoll/internal/pages"
+	"github.com/gofiber/fiber/v2"
+)
 
-func SetupRoutes(app *fiber.App) error {
+func Setup(app *fiber.App) error {
 
 	app.Get("/", func(ctx *fiber.Ctx) error {
 		// TODO
@@ -12,8 +15,7 @@ func SetupRoutes(app *fiber.App) error {
 	// ------- NEW POLL -------
 
 	app.Get("/new", func(ctx *fiber.Ctx) error {
-		// TODO
-		return nil
+		return ctx.Type("html").SendString(pages.NewPoll())
 	})
 
 	app.Post("/new", func(ctx *fiber.Ctx) error {
