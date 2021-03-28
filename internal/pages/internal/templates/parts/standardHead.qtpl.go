@@ -19,6 +19,7 @@ var (
 
 func StreamStandardHead(qw422016 *qt422016.Writer, title string) {
 	qw422016.N().S(`
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <title>`)
 	qw422016.E().S(title)
 	qw422016.N().S(`</title>
