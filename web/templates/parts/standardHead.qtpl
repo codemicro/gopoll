@@ -3,5 +3,5 @@ This is a standard page header
 {% func StandardHead(title string) %}
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <title>{%s title %}</title>
-<script src="https://cdn.skypack.dev/@hotwired/turbo"></script>
+<script src="https://cdn.skypack.dev/@hotwired/turbo" type="module"></script> <!-- TODO: change this out for non-dev -->
 {% endfunc %}

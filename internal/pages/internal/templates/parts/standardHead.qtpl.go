@@ -23,7 +23,7 @@ func StreamStandardHead(qw422016 *qt422016.Writer, title string) {
 <title>`)
 	qw422016.E().S(title)
 	qw422016.N().S(`</title>
-<script src="https://cdn.skypack.dev/@hotwired/turbo"></script>
+<script src="https://cdn.skypack.dev/@hotwired/turbo" type="module"></script>
 `)
 }
 
