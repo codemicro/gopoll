@@ -1,0 +1,3 @@
+.textColorTransition {
+    @apply transition-colors duration-100 transform;
+}
