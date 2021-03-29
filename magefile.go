@@ -115,7 +115,7 @@ type NPM mg.Namespace
 func (NPM) InstallDeps() error {
 
 	if !exsh.IsCmdAvail("npm") || !exsh.IsCmdAvail("npx") {
-		return errors.New("npm and/or npm cannot be found on PATH - see https://nodejs.org/en/")
+		return errors.New("npm and/or npx cannot be found on PATH - see https://nodejs.org/en/")
 	}
 
 	os.Chdir("web")
