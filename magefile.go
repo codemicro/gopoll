@@ -16,9 +16,28 @@ import (
 	"github.com/magefile/mage/target"
 )
 
+var devMode bool
+
+// Dev runs all prebuild setps and runs cmd/gopoll in ./run
+func Dev() error {
+	devMode = true
+	prebuild()
+	os.Chdir("run")
+	defer func() {
+		os.Chdir("..")
+	}()
+	return sh.Run("go", "run", "github.com/codemicro/gopoll/cmd/gopoll")
+}
+
 // InstallDeps installs dependencies for the Go portion of the project
 func InstallDeps() error {
 	return sh.Run("go", "mod", "download")
+}
+
+func prebuild() {
+	mg.Deps(InstallDeps)
+	mg.Deps(GenerateTemplates)
+	mg.Deps(BundleResources)
 }
 
 // QuickTemplate templates
@@ -52,7 +71,7 @@ func GenerateTemplates() error {
 				newFilename := strings.Replace(filename, templateDir, generatedTemplatesOutputDir, 1)
 
 				if mg.Verbose() {
-					fmt.Printf("Moving %s to %s", filename, newFilename)
+					fmt.Printf("Moving %s to %s\n", filename, newFilename)
 				}
 
 				if err := sh.Copy(newFilename, filename); err != nil {
@@ -129,7 +148,14 @@ func (NPM) BuildStyles() error {
 			os.Chdir("..")
 		}()
 
-		return sh.RunWith(map[string]string{"NODE_ENV": "production"}, "npx", "postcss", inputCSSFilename, "-o", alib.OsPathJoin("..", outputCSSFilename))
+		env := make(map[string]string)
+		if !devMode {
+			env["NODE_ENV"] = "production"
+		} else if mg.Verbose() {	
+			fmt.Println("Dev mode enabled, stylesheet purge will not occur")
+		}
+
+		return sh.RunWith(env, "npx", "postcss", inputCSSFilename, "-o", alib.OsPathJoin("..", outputCSSFilename))
 	} else if mg.Verbose() {
 		fmt.Println("Skipping building styles, no changes since last build")
 	}
