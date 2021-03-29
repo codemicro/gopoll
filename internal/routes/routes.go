@@ -2,6 +2,7 @@ package routes
 
 import (
 	"github.com/codemicro/gopoll/internal/pages"
+	"github.com/codemicro/gopoll/internal/webRes"
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -40,6 +41,13 @@ func Setup(app *fiber.App) error {
 	app.Get("/results/:pollId", func(ctx *fiber.Ctx) error {
 		// TODO
 		return nil
+	})
+
+	// ------- RESOURCES -------
+
+	// TODO: compression
+	app.Get("/res/main.css", func(ctx *fiber.Ctx) error {
+		return ctx.Type("css").Send(webRes.MustAsset("main.css"))
 	})
 
 	return nil
