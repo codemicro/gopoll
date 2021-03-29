@@ -13,6 +13,7 @@ import (
 	"github.com/codemicro/alib-go/mage/exsh"
 	"github.com/magefile/mage/mg"
 	"github.com/magefile/mage/sh"
+	"github.com/magefile/mage/target"
 )
 
 func InstallDeps() error {
@@ -69,7 +70,7 @@ type NPM mg.Namespace
 
 // ./web Node stuff
 
-func (NPM) InstallNPMDeps() error {
+func (NPM) InstallDeps() error {
 
 	if !exsh.IsCmdAvail("npm") || !exsh.IsCmdAvail("npx") {
 		return errors.New("npm and/or npm cannot be found on PATH - see https://nodejs.org/en/")
@@ -91,14 +92,23 @@ var inputCSSFilename = alib.OsPathJoin("css", "base.css")
 
 func (NPM) BuildStyles() error {
 
-	mg.Deps(NPM.InstallNPMDeps)
+	mg.Deps(NPM.InstallDeps)
 
 	_ = os.Mkdir("build", os.ModeDir)
 
-	os.Chdir("web")
-	defer func() {
-		os.Chdir("..")
-	}()
+	// Check to see if source CSS has been modified since the last built set of CSS
+	if sourcesNewer, err := target.Dir(alib.OsPathJoin("build", outputCSSFilename), alib.OsPathJoin("web", "css")); err != nil {
+		return err
+	} else if sourcesNewer {
+		os.Chdir("web")
+		defer func() {
+			os.Chdir("..")
+		}()
 
-	return sh.RunWith(map[string]string{"NODE_ENV": "production"}, "npx", "postcss", inputCSSFilename, "-o", alib.OsPathJoin("..", "build", outputCSSFilename))
+		return sh.RunWith(map[string]string{"NODE_ENV": "production"}, "npx", "postcss", inputCSSFilename, "-o", alib.OsPathJoin("..", "build", outputCSSFilename))
+	} else if mg.Verbose() {
+		fmt.Println("Skipping building styles, no changes since last build")
+	}
+
+	return nil
 }
