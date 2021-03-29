@@ -6,9 +6,11 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      // Merak UI config
       spacing: {
         128: '32rem',
       },
+      // Custom colours
       colors: {
         theme: {
           DEFAULT: '#233D4D',
