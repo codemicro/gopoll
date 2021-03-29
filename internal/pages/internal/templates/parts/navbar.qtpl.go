@@ -19,7 +19,7 @@ var (
 
 func StreamNavbar(qw422016 *qt422016.Writer) {
 	qw422016.N().S(`
-<nav class="bg-theme shadow dark:bg-gray-800">
+<nav class="bg-theme shadow">
     <div class="container px-6 py-3 mx-auto sm:flex sm:justify-between sm:items-center">
         <div class="flex items-center justify-between">
             <div>
