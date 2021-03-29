@@ -20,16 +20,16 @@ var (
 func StreamNavbar(qw422016 *qt422016.Writer) {
 	qw422016.N().S(`
 <nav class="bg-theme shadow dark:bg-gray-800">
-    <div class="container px-6 py-3 mx-auto md:flex md:justify-between md:items-center">
+    <div class="container px-6 py-3 mx-auto sm:flex sm:justify-between sm:items-center">
         <div class="flex items-center justify-between">
             <div>
-                <a class="text-xl font-bold text-white md:text-2xl hover:text-theme-highlight textColorTransition" href="#">GoPoll</a>
+                <a class="text-xl font-bold text-white sm:text-2xl hover:text-theme-highlight textColorTransition" href="#">GoPoll</a>
             </div>
         </div>
 
         <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
-        <div class="items-center md:flex">
-            <div class="flex flex-col md:flex-row md:mx-6">
+        <div class="items-center sm:flex">
+            <div class="flex flex-col sm:flex-row sm:mx-6">
                 `)
 	streamnavbarLink(qw422016, "#", "View poll", true)
 	qw422016.N().S(`
@@ -60,9 +60,9 @@ func Navbar() string {
 func streamnavbarLink(qw422016 *qt422016.Writer, location, clickable string, hideOnMd bool) {
 	qw422016.N().S(`
 `)
-	classString := "my-1 text-sm font-medium text-white textColorTransition hover:text-theme-highlight md:mx-4 place-self-center"
+	classString := "my-1 text-sm font-medium text-white textColorTransition hover:text-theme-highlight sm:mx-4 place-self-center"
 	if hideOnMd {
-		classString += " hidden md:block"
+		classString += " hidden sm:block"
 	}
 
 	qw422016.N().S(`
@@ -93,9 +93,9 @@ func navbarLink(location, clickable string, hideOnMd bool) string {
 func streamnavbarButton(qw422016 *qt422016.Writer, location, clickable string, hideOnMd bool) {
 	qw422016.N().S(`
 `)
-	classString := "block w-1/2 px-3 py-2 mx-1 text-sm font-medium leading-5 text-center text-white textColorTransition bg-theme-highlight rounded-md hover:bg-theme-highlight-darker md:mx-0 md:w-auto"
+	classString := "block w-1/2 px-3 py-2 mx-1 text-sm font-medium leading-5 text-center text-white textColorTransition bg-theme-highlight rounded-md hover:bg-theme-highlight-darker sm:mx-0 sm:w-auto"
 	if hideOnMd {
-		classString += " hidden md:block"
+		classString += " hidden sm:block"
 	}
 
 	qw422016.N().S(`
