@@ -8,6 +8,7 @@ package templates
 
 import (
 	"github.com/codemicro/gopoll/internal/pages/internal/id"
+	"github.com/codemicro/gopoll/internal/pages/internal/templates/parts"
 )
 
 import (
@@ -24,12 +25,24 @@ var (
 func StreamNewPoll(qw422016 *qt422016.Writer) {
 	qw422016.N().S(`
 
-    <turbo-frame id="`)
+    `)
+	parts.StreamNavbar(qw422016)
+	qw422016.N().S(`
+
+    `)
+	parts.StreamSpacer(qw422016)
+	qw422016.N().S(`
+
+    <div class="contentContainer">
+
+        <turbo-frame id="`)
 	qw422016.E().S(id.MainBox)
 	qw422016.N().S(`">
-        <h2>Create a new poll</h2>
-        <p>Blah blah</p>
-    </turbo-frame>
+            <h2>Create a new poll</h2>
+            <p>Blah blah</p>
+        </turbo-frame>
+
+    </div>
 
 `)
 }
