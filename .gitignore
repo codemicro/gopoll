@@ -146,3 +146,5 @@ modules.xml
 !.vscode/launch.json
 !.vscode/extensions.json
 *.code-workspace
+
+internal/webRes/webRes.go
