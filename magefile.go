@@ -68,6 +68,25 @@ func GenerateTemplates() error {
 	return err
 }
 
+// BundleResources takes various web resources and generates the ./internal/webRes package
+func BundleResources() error {
+	mg.Deps(NPM.BuildStyles)
+
+	// ensure go-bindata is available
+	if err := exsh.EnsureGoBin("go-bindata", "github.com/go-bindata/go-bindata/..."); err != nil {
+		return err
+	}
+
+	command := []string{
+		"--nometadata", "-o", alib.OsPathJoin("internal", "webRes", "webRes.go"), "--pkg", "webRes", "--prefix", "build",
+	}
+
+	filesToBundle := []string{outputCSSFilename}
+
+	// go-bindata --nometadata -o internal/webRes/webRes.go --pkg webRes --prefix build <files>
+	return sh.Run("go-bindata", append(command, filesToBundle...)...)
+}
+
 type NPM mg.Namespace
 
 // ./web Node stuff
