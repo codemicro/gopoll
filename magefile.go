@@ -120,8 +120,8 @@ func (NPM) BuildStyles() error {
 
 	_ = os.Mkdir("build", os.ModeDir)
 
-	// Check to see if source CSS has been modified since the last built set of CSS
-	if sourcesNewer, err := target.Dir(outputCSSFilename, alib.OsPathJoin("web", "css")); err != nil {
+	// Check to see if source CSS has been modified since the last modification of: source CSS, Tailwind config file or templates
+	if sourcesNewer, err := target.Dir(outputCSSFilename, alib.OsPathJoin("web", "tailwind.config.js"), alib.OsPathJoin("web", "css"), alib.OsPathJoin("web", "templates")); err != nil {
 		return err
 	} else if sourcesNewer {
 		os.Chdir("web")
