@@ -131,7 +131,14 @@ func (NPM) InstallDeps() error {
 var (
 	outputCSSFilename = alib.OsPathJoin("build", "main.css")
 	inputCSSFilename = alib.OsPathJoin("css", "base.css")
+
+	forceBuildStyles bool
 )
+
+// ForceBuild forces NPM styles to be built regardless of file modification times
+func (NPM) ForceBuild() {
+	forceBuildStyles = true
+}
 
 // BuildStyles builds Tailwind CSS styles from ./web/css
 func (NPM) BuildStyles() error {
@@ -154,7 +161,7 @@ func (NPM) BuildStyles() error {
 	// Check to see if source CSS has been modified since the last modification of: source CSS, Tailwind config file or templates
 	if sourcesNewer, err := target.Dir(outputCSSFilename, ); err != nil {
 		return err
-	} else if sourcesNewer {
+	} else if sourcesNewer || forceBuildStyles {
 		os.Chdir("web")
 		defer func() {
 			os.Chdir("..")
