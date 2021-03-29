@@ -139,8 +139,19 @@ func (NPM) BuildStyles() error {
 
 	_ = os.Mkdir("build", os.ModeDir)
 
+	sourcesToCheck := []string{
+		// These sources should always trigger a recompile
+		alib.OsPathJoin("web", "tailwind.config.js"),
+		alib.OsPathJoin("web", "css"),
+	}
+
+	if !devMode {
+		// If we're not in dev mode, changes to the templates should also trigger a CSS rebuild due to the usage of style purges
+		sourcesToCheck = append(sourcesToCheck, alib.OsPathJoin("web", "templates"))
+	}
+
 	// Check to see if source CSS has been modified since the last modification of: source CSS, Tailwind config file or templates
-	if sourcesNewer, err := target.Dir(outputCSSFilename, alib.OsPathJoin("web", "tailwind.config.js"), alib.OsPathJoin("web", "css"), alib.OsPathJoin("web", "templates")); err != nil {
+	if sourcesNewer, err := target.Dir(outputCSSFilename, ); err != nil {
 		return err
 	} else if sourcesNewer {
 		os.Chdir("web")
