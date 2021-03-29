@@ -89,9 +89,10 @@ func (NPM) InstallDeps() error {
 
 // Tailwind CSS stylesheets
 
-const outputCSSFilename = "main.css"
-
-var inputCSSFilename = alib.OsPathJoin("css", "base.css")
+var (
+	outputCSSFilename = alib.OsPathJoin("build", "main.css")
+	inputCSSFilename = alib.OsPathJoin("css", "base.css")
+)
 
 // BuildStyles builds Tailwind CSS styles from ./web/css
 func (NPM) BuildStyles() error {
@@ -101,7 +102,7 @@ func (NPM) BuildStyles() error {
 	_ = os.Mkdir("build", os.ModeDir)
 
 	// Check to see if source CSS has been modified since the last built set of CSS
-	if sourcesNewer, err := target.Dir(alib.OsPathJoin("build", outputCSSFilename), alib.OsPathJoin("web", "css")); err != nil {
+	if sourcesNewer, err := target.Dir(outputCSSFilename, alib.OsPathJoin("web", "css")); err != nil {
 		return err
 	} else if sourcesNewer {
 		os.Chdir("web")
@@ -109,7 +110,7 @@ func (NPM) BuildStyles() error {
 			os.Chdir("..")
 		}()
 
-		return sh.RunWith(map[string]string{"NODE_ENV": "production"}, "npx", "postcss", inputCSSFilename, "-o", alib.OsPathJoin("..", "build", outputCSSFilename))
+		return sh.RunWith(map[string]string{"NODE_ENV": "production"}, "npx", "postcss", inputCSSFilename, "-o", alib.OsPathJoin("..", outputCSSFilename))
 	} else if mg.Verbose() {
 		fmt.Println("Skipping building styles, no changes since last build")
 	}
