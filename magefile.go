@@ -26,7 +26,8 @@ func Dev() error {
 	defer func() {
 		os.Chdir("..")
 	}()
-	return sh.Run("go", "run", "github.com/codemicro/gopoll/cmd/gopoll")
+	fmt.Println("Starting github.com/codemicro/gopoll/cmd/gopoll")
+	return sh.RunV("go", "run", "github.com/codemicro/gopoll/cmd/gopoll")
 }
 
 // InstallDeps installs dependencies for the Go portion of the project
