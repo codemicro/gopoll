@@ -16,6 +16,7 @@ import (
 	"github.com/magefile/mage/target"
 )
 
+// InstallDeps installs dependencies for the Go portion of the project
 func InstallDeps() error {
 	return sh.Run("go", "mod", "download")
 }
@@ -25,6 +26,7 @@ func InstallDeps() error {
 var templateDir = alib.OsPathJoin("web", "templates")
 var generatedTemplatesOutputDir = alib.OsPathJoin("internal", "pages", "internal", "templates")
 
+// GenerateTemplates runs the QuickTemplate compiler against HTML templates found in ./web/templates and copies them to ./internal/pages/internal/templates
 func GenerateTemplates() error {
 
 	// ensure qtc is available
@@ -70,6 +72,7 @@ type NPM mg.Namespace
 
 // ./web Node stuff
 
+// InstallDeps installs NPM dependencies for ./web
 func (NPM) InstallDeps() error {
 
 	if !exsh.IsCmdAvail("npm") || !exsh.IsCmdAvail("npx") {
@@ -90,6 +93,7 @@ const outputCSSFilename = "main.css"
 
 var inputCSSFilename = alib.OsPathJoin("css", "base.css")
 
+// BuildStyles builds Tailwind CSS styles from ./web/css
 func (NPM) BuildStyles() error {
 
 	mg.Deps(NPM.InstallDeps)
