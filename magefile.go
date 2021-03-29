@@ -174,7 +174,12 @@ func (NPM) BuildStyles() error {
 			fmt.Println("Dev mode enabled, stylesheet purge will not occur")
 		}
 
-		return sh.RunWith(env, "npx", "postcss", inputCSSFilename, "-o", alib.OsPathJoin("..", outputCSSFilename))
+		var verboseArg string
+		if mg.Verbose() {
+			verboseArg = "--verbose"
+		}
+		
+		return sh.RunWith(env, "npx", "postcss", inputCSSFilename, "-o", alib.OsPathJoin("..", outputCSSFilename), verboseArg)
 	} else if mg.Verbose() {
 		fmt.Println("Skipping building styles, no changes since last build")
 	}
