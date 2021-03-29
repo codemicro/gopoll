@@ -7,7 +7,7 @@ import (
 
 func NewPoll() string {
 	head := newHeadBuilder()
-	head.Add(fStr(parts.StandardHead("Hello!")))
+	head.Add(fStr(parts.StandardHead("Create a new poll")))
 	body := templates.NewPoll()
 	return fromBase(head.Render(), body)
 }
