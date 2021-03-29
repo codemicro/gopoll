@@ -159,7 +159,7 @@ func (NPM) BuildStyles() error {
 	}
 
 	// Check to see if source CSS has been modified since the last modification of: source CSS, Tailwind config file or templates
-	if sourcesNewer, err := target.Dir(outputCSSFilename, ); err != nil {
+	if sourcesNewer, err := target.Dir(outputCSSFilename, sourcesToCheck...); err != nil {
 		return err
 	} else if sourcesNewer || forceBuildStyles {
 		os.Chdir("web")
