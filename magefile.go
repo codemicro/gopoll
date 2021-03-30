@@ -22,6 +22,7 @@ var devMode bool
 func Dev() error {
 	devMode = true
 	prebuild()
+	_ = os.Mkdir("run", os.ModeDir)
 	os.Chdir("run")
 	defer func() {
 		os.Chdir("..")
