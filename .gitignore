@@ -148,3 +148,5 @@ modules.xml
 *.code-workspace
 
 internal/webRes/webRes.go
+
+internal/pages/internal/templates/
