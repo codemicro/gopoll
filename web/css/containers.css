@@ -1,3 +1,7 @@
 .contentContainer {
     @apply container px-4 md:px-16 mx-auto;
 }
+
+.dottedYellowContainer {
+    @apply bg-yellow-200 rounded-lg border-4 border-yellow-400 border-dotted mt-4
+}
