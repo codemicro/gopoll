@@ -5,7 +5,7 @@ Standard page navbar
     <div class="container px-6 py-3 mx-auto sm:flex sm:justify-between sm:items-center">
         <div class="flex items-center justify-between">
             <div>
-                <a class="text-xl font-bold text-white sm:text-2xl hover:text-theme-highlight textColorTransition font-title" href="#">GoPoll</a>
+                <a class="text-xl font-bold text-white sm:text-2xl hover:text-theme-highlight textColorTransition font-title" href="/">GoPoll</a>
             </div>
         </div>
 
@@ -13,7 +13,7 @@ Standard page navbar
         <div class="items-center sm:flex">
             <div class="flex flex-col sm:flex-row sm:mx-6">
                 {%= navbarLink("#", "View poll", true) %}
-                {%= navbarButton("#", "Create poll", true) %}
+                {%= navbarButton("/new", "Create poll", true) %}
             </div>
         </div>
     </div>
