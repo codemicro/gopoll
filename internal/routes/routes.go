@@ -9,8 +9,7 @@ import (
 func Setup(app *fiber.App) error {
 
 	app.Get("/", func(ctx *fiber.Ctx) error {
-		// TODO
-		return nil
+		return ctx.Type("html").SendString(pages.Homepage())
 	})
 
 	// ------- NEW POLL -------

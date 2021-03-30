@@ -5,12 +5,10 @@ import (
 	"github.com/codemicro/gopoll/internal/pages/internal/templates/parts"
 )
 
-func SimplePage(name string) string {
-
+func Homepage() string {
 	head := newHeadBuilder()
-	head.Add(fStr(parts.StandardHead("Hello!")))
-	body := templates.Simple(name)
-
+	head.Add(fStr(parts.StandardHead("GoPoll")))
+	body := templates.Homepage()
 	return fromBase(head.Render(), body)
-
 }
+

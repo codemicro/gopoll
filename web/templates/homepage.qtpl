@@ -1,0 +1,38 @@
+Homepage template
+
+{% import (
+"github.com/codemicro/gopoll/internal/pages/internal/id"
+"github.com/codemicro/gopoll/internal/pages/internal/templates/parts"
+) %}
+
+{% func Homepage() %}
+
+    {%= parts.Navbar() %}
+
+    {%= parts.Spacer() %}
+
+    <div class="contentContainer">
+
+        <div class="flex">
+
+            <div class="flex-auto">
+                <div class="p-8 pl-0">
+                    <h1 class="text-6xl font-title">I need<br>filler text</h1>
+                </div>
+            </div>
+
+
+            <div class="flex-auto">
+
+                <turbo-frame id="{%s id.MainBox %}" src="/new">
+                    <div class="dottedYellowContainer max-w-full">
+                        <p>Loading...</p>
+                    </div>
+                </turbo-frame>
+
+            </div>
+        </div>
+
+    </div>
+
+{% endfunc %}
