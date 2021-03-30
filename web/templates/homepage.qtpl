@@ -24,11 +24,13 @@ Homepage template
 
             <div class="flex-auto">
 
-                <turbo-frame id="{%s id.MainBox %}" src="/new">
-                    <div class="dottedYellowContainer max-w-full">
-                        <p>Loading...</p>
-                    </div>
-                </turbo-frame>
+                <div class="dottedYellowContainer max-w-full">
+                    <turbo-frame id="{%s id.MainBox %}" src="/new">
+                        <div class="p-4">
+                            <p>Loading...</p>
+                        </div>
+                    </turbo-frame>
+                </div>
 
             </div>
         </div>
