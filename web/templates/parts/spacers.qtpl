@@ -3,3 +3,11 @@ Various spacers
 {% func Spacer() %}
 <div class="py-4"></div>
 {% endfunc %}
+
+{% func SpacerSmall() %}
+<div class="py-2"></div>
+{% endfunc %}
+
+{% func SpacerTiny() %}
+<div class="py-1"></div>
+{% endfunc %}
